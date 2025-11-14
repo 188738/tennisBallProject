@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 
-img_path = "test_images/my_photo.jpg"  # put a test image here
+img_path = "test_images/image.jpg"  # put a test image here
 
 model = keras.models.load_model("tennis_cnn.h5")
 
