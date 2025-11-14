@@ -35,7 +35,7 @@ val_ds   = val_ds.cache().prefetch(AUTOTUNE)
 # --- 2. Build a small CNN from scratch ---
 
 model = keras.Sequential([
-    layers.Rescaling(1./255, input_shape=img_size + (3,)),  # normalize [0,255] -> [0,1]
+    layers.Rescaling(255./255, input_shape=img_size + (3,)),  # normalize [0,255] -> [0,1]
 
     layers.Conv2D(16, (3, 3), activation="relu"),
     layers.MaxPooling2D(),
@@ -47,7 +47,7 @@ model = keras.Sequential([
     layers.MaxPooling2D(),
 
     layers.Flatten(),
-    layers.Dense(64, activation="relu"),
+    layers.Dense(128, activation="relu"),
     layers.Dropout(0.5),
     layers.Dense(1, activation="sigmoid")  # 1 output neuron for binary classification
 ])
@@ -62,7 +62,7 @@ model.summary()
 
 # --- 3. Train the model ---
 
-epochs = 10
+epochs = 50
 history = model.fit(
     train_ds,
     validation_data=val_ds,
